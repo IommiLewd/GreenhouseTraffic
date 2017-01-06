@@ -2,39 +2,27 @@
 <html>
 
 <head>
+      <style type="text/css">
+          body {background-color: gray;}
+         #phaser-example{border: 1px solid black;
+          width: 840px;
+          margin-left: auto;
+          margin-right: auto;}
+
+  </style>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Creature From The Moat</title>
+    <title>Rainworld Alpha   0.29</title>
     <meta name="" content="CFTM">
-    <link rel="stylesheet" href="gamestylesheet.css">
-       <script src='phaser.js'></script>
+    <script src='js/phaser.js'></script>
+
 
 </head>
 
 <body>
-    <div id='appWindow'>
     <div id='phaser-example'> </div>
-        
-                <div id='statusBox'>
-    
-        <div class='statusContainer'>
-        <div class='statusWidth'><div id='healthMeter' class='meter'></div></div>
-            <div class='statusModifierDecrease' id='sm1'></div>
-            </div>
-        
-        <div class='statusContainer'>
-        <div class='statusWidth'><div id='joyMeter' class='meter'></div></div>
-            <div class='statusModifierDecrease' id='sm2'></div>
-            </div>
+    <script src='js/boot.js'></script>
 
-        <div class='statusContainer'>
-        <div class='statusWidth'><!-- Insert StatusBar Here --></div>
-            <div class='statusModifierNone' id='sm3'></div>
-            </div>
-            
-        </div>
-    </div>
-    <script src='creature.js'></script>
 </body>
 
 </html>
