@@ -25,6 +25,7 @@ class SimpleLevel extends Phaser.State {
         this._map.addTilesetImage('basicTileset', 'basicTileset');
         this._collision_layer = this._map.createLayer('CollisionLayer');
         this._collision_layer.resizeWorld();
+        this.roundCounter = 0;
     }
 
     _addPlayer(x, y) {
@@ -45,11 +46,28 @@ class SimpleLevel extends Phaser.State {
     //        return result;
     //    }
 
-
+    _initCombatMode() {
+        this.player._combatOverride();
+        this.roundCounter++;
+        console.log('Combat Initiated. Current round is: ' + this.roundCounter + ' ');
+        //Create random variable between 1 and 2 initially, use those two to decide between block and attack
+        var randNumber = Math.random() * (3 - 1) + 1;
+        randNumber = Math.floor(randNumber);
+        if (randNumber === 1) {
+            // this.enemy._defend();
+            console.log(' The enemy is defending!');
+        }
+        if (randNumber === 2) {
+            // this.enemy._attack();
+            console.log('The enemy is attacking!');
+        }
+//        this.roundTimerBox.visibility = visible;
+        //play timer animation now.
+    }
 
 
     _checkCollision() {
-          
+
         this.game.physics.arcade.collide(this.enemy, this._collision_layer);
         this.game.physics.arcade.collide(this.player, this._collision_layer);
         this.game.physics.arcade.collide(this.player.target, this._collision_layer);
@@ -57,8 +75,7 @@ class SimpleLevel extends Phaser.State {
 
 
     _initiateCombat() {
-            console.log('Combat Initiated');
-            this.player._combatOverride();
+
 
         }
         //public methods :
@@ -80,15 +97,14 @@ class SimpleLevel extends Phaser.State {
     }
     update() {
         this._checkCollision();
-   
 
-//              this.physics.arcade.overlap(this.bullets, this._collision_layer, this._kill_bullet, function (bullet, _collision_layer) {
-//                return _collision_layer.collides;
-//            }, this);
+        //              this.physics.arcade.overlap(this.bullets, this._collision_layer, this._kill_bullet, function (bullet, _collision_layer) {
+        //                return _collision_layer.collides;
+        //            }, this);
 
-        if (this.player.x < this.enemy.x + 128 && this.player.x > this.enemy.x - 128) {
-          //  this._initiateCombat();
-            
+        if (this.player.x < this.enemy.x + 128 && this.player.x > this.enemy.x - 128 && this.player._combat_mode_engaged === false) {
+            this._initCombatMode();
+
         }
     }
 }

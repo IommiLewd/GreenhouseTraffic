@@ -25,14 +25,9 @@ class Enemy extends Phaser.Sprite {
         this.game.physics.arcade.gravity.y = 360;
         this.anchor.setTo(0.5);
         this._map = game.add.tilemap('level-1');
-
+        this._health = 100;
     }
-
-
-
-
     //@override
     update() {
-
     }
 }

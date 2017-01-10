@@ -79,16 +79,18 @@ class Player extends Phaser.Sprite {
         this.body.velocity.x = 0;
         this.target.kill();
         this.navigatorAlive = false;
-        this._combat_mode_engaged = false;
+        this._combat_mode_engaged = true;
     }
 
     //@override
     update() {
-        if (this._combat_mode_engaged) {
+        if(this._combat_mode_engaged === true) {
+
+        }
+                
+        if (this._combat_mode_engaged === false) {
             if (this.game.input.activePointer.leftButton.isDown) {
                 this.testcoordinate = this._map.getTileWorldXY(this.game.input.activePointer.worldX, this.game.input.activePointer.worldY, 64, 64, 'CollisionLayer');
-
-
                 if (!this.testcoordinate) {
                     this._addNavigator();
                 }
