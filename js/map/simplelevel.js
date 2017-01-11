@@ -34,6 +34,9 @@ class SimpleLevel extends Phaser.State {
     _addEnemy() {
         this.enemy = new Enemy(this.game, 800, 400);
     }
+    _addUserInterface() {
+          this.userInterface = new userInterface(this.game);
+    }
 
     //We use this to find and create objects from the json.
     //    _findObjectsByType(targetType, tilemap, layer) {
@@ -50,33 +53,36 @@ class SimpleLevel extends Phaser.State {
         this.player._combatOverride();
         this.roundCounter++;
         console.log('Combat Initiated. Current round is: ' + this.roundCounter + ' ');
-        //Create random variable between 1 and 2 initially, use those two to decide between block and attack
-        var randNumber = Math.random() * (3 - 1) + 1;
-        randNumber = Math.floor(randNumber);
-        if (randNumber === 1) {
+        //this.roundTimerBox.visibility = visible;
+        //play timer animation now.
+        //At end of animation timer run enemyAttack and then battleCalculator
+        this._enemyAttack();
+
+    }
+
+    _enemyAttack() {
+        this.randNumber = Math.random() * (3 - 1) + 1;
+        this.randNumber = Math.floor(this.randNumber);
+        if (this.randNumber === 1 && this.userInterface.actionSelected === 1) {
             // this.enemy._defend();
             console.log(' The enemy is defending!');
         }
-        if (randNumber === 2) {
+        if (this.randNumber === 2) {
             // this.enemy._attack();
             console.log('The enemy is attacking!');
         }
-//        this.roundTimerBox.visibility = visible;
-        //play timer animation now.
     }
 
-
+    _playerAttack() {
+        
+    }
+    
+    
+    
     _checkCollision() {
-
-        this.game.physics.arcade.collide(this.enemy, this._collision_layer);
-        this.game.physics.arcade.collide(this.player, this._collision_layer);
-        this.game.physics.arcade.collide(this.player.target, this._collision_layer);
-    }
-
-
-    _initiateCombat() {
-
-
+            this.game.physics.arcade.collide(this.enemy, this._collision_layer);
+            this.game.physics.arcade.collide(this.player, this._collision_layer);
+            this.game.physics.arcade.collide(this.player.target, this._collision_layer);
         }
         //public methods :
         //@override:
@@ -88,12 +94,11 @@ class SimpleLevel extends Phaser.State {
         //        this._initcursor();
         this._addPlayer(0, 0);
         this._addEnemy();
-
         this.game.camera.follow(this.player);
         //        //Everything on _collision_layer will collide
         this._map.setCollisionBetween(0, 160, true, this._collision_layer);
         //        this._map.setTileIndexCallback([33, 43, 51, 61], this.player.setOnLadder, this.player, this._ladder_layer);
-
+        this._addUserInterface();
     }
     update() {
         this._checkCollision();
