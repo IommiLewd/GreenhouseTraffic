@@ -92,7 +92,7 @@ class SimpleLevel extends Phaser.State {
                 console.log('Enemy Attack Blocked');
             }
         }
-        this.userInterface._playerBlocking = false;
+   
         this.userInterface.actionSelected = 0;
         this.userInterface.timerBar.width = 0;
         this._initCombatMode();

@@ -26,6 +26,21 @@ class Enemy extends Phaser.Sprite {
         this.anchor.setTo(0.5);
         this._map = game.add.tilemap('level-1');
         this._health = 100;
+        this._initHealthIndicator();
+    }
+    
+    _initHealthIndicator() {
+        this.healthStatus = this.game.add.tileSprite(0, -56, 110, 10, 'HPixel');
+        this.healthStatus.anchor.setTo(0.5);
+        this.addChild(this.healthStatus);
+    }
+    
+    _displayHealthIndicator() {
+        
+    }
+    
+    _enemyDamageTaken() {
+        
     }
     //@override
     update() {

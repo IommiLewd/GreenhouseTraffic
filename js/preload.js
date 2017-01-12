@@ -15,6 +15,9 @@ class Preload extends Phaser.State {
         this.load.image('spell1', 'img/UiItems/spell1.png');
         this.load.image('spell2', 'img/UiItems/spell2.png');
         
+          this.load.image('TPixel', 'img/UiItems/turnPixel.png');
+         this.load.image('HPixel', 'img/UiItems/healthPixel.png');
+        
         // js scripts :
         this.load.script('player', 'js/entity/player.js');
         this.load.script('simpleLevel', 'js/map/simplelevel.js');
