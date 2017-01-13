@@ -74,14 +74,9 @@ class Player extends Phaser.Sprite {
         }
     }
 
-
-    _combatOverride() {
-        this.body.velocity.x = 0;
-        this.target.kill();
-        this.navigatorAlive = false;
-        this._combat_mode_engaged = true;
-    }
-
+ _movementReset() {
+     this.body.velocity.x = 0;
+ }
     //@override
     update() {
         if(this._combat_mode_engaged === true) {
@@ -107,12 +102,12 @@ class Player extends Phaser.Sprite {
 
 
             if (this.body.blocked.right) {
-                this.body.velocity.y = -70;
+                this.body.velocity.y = -60;
                 this._checkOrientation();
             }
 
             if (this.body.blocked.left) {
-                this.body.velocity.y = -70;
+                this.body.velocity.y = -60;
 
                 this._checkOrientation();
             }

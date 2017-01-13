@@ -16,7 +16,7 @@
  * @method update :
  *
  */
-class Enemy extends Phaser.Sprite {
+class Minion extends Phaser.Sprite {
     constructor(game, posx, posy, tilemap) {
         super(game, posx, posy, 'enemy', 0);
         game.add.existing(this);

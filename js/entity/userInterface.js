@@ -4,71 +4,27 @@ class userInterface extends Phaser.Sprite {
         game.add.existing(this);
         game.physics.arcade.enable(this);
         this._initOverlay();
-        this._player_energy = 20;
         this._player_health = 100;
-        this._energy_regen = true;
         this.actionSelected = 0;
         this._playerBlocking = false;
     }
 
     // Initialise menu items here
     _initOverlay() {
-        this.attackButton = this.game.add.sprite(20, 20, 'attack');
-        this.attackButton.fixedToCamera = true;
-        this.attackButton.inputEnabled = true;
-        this.attackButton.events.onInputDown.add(this._attackAction, this);
-
-        this.defendButton = this.game.add.sprite(20, 56, 'defend');
-        this.defendButton.fixedToCamera = true;
-        this.defendButton.inputEnabled = true;
-        this.defendButton.events.onInputDown.add(this._defendAction, this);
-
-        this.spell1Button = this.game.add.sprite(20, 92, 'spell1');
-        this.spell1Button.fixedToCamera = true;
-        this.spell1Button.inputEnabled = true;
-        this.spell1Button.events.onInputDown.add(this._spell1Action, this);
-
-        this.spell2Button = this.game.add.sprite(20, 128, 'spell2');
-        this.spell2Button.fixedToCamera = true;
-        this.spell2Button.inputEnabled = true;
-        this.spell2Button.events.onInputDown.add(this._spell2Action, this);
-
-        this.timerBar = this.game.add.tileSprite(210, 34, 1, 10, 'TPixel');
-        this.timerBar.fixedToCamera = true;
-
-        this.healthBar = this.game.add.tileSprite(210, 20, 220, 10, 'HPixel');
+        this.healthBarStatus = this.game.add.tileSprite(4, 4, 224, 14, 'DHPixel');
+        this.healthBarStatus.fixedToCamera = true;
+        this.healthBar = this.game.add.tileSprite(6, 6, 220, 10, 'HPixel');
         this.healthBar.fixedToCamera = true;
+        
     }
     _playerDamage(_damage) {
         this._player_health -= _damage;
-  this.healthBar.width  = this._player_health / 100 * 220;
+        this.healthBar.width = this._player_health / 100 * 220;
+        
     }
 
 
-    _attackAction() {
-        // console.log('attacking!');
-        this.actionSelected = 1;
-        console.log('actionSelected is ' + this.actionSelected);
-    }
 
-    _defendAction() {
-        // console.log('defending!');
-        this.actionSelected = 2;
-        console.log('actionSelected is ' + this.actionSelected);
-        this._playerBlocking = true;
-    }
-
-    _spell1Action() {
-        // console.log('firing spell1!');
-        this.actionSelected = 3;
-        console.log('actionSelected is ' + this.actionSelected);
-    }
-
-    _spell2Action() {
-        //  console.log('firing spell2!');
-        this.actionSelected = 4;
-        console.log('actionSelected is ' + this.actionSelected);
-    }
 
     // When combat event is is fired
     // We should have a round timer, keeping track of the rounds. so.. RoundCounter++; i guess.
