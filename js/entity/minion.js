@@ -57,7 +57,6 @@ class Minion extends Phaser.Sprite {
             this.body.velocity.x = -80;
         }
         this.body.velocity.y = 0;
-
     }
 
 
