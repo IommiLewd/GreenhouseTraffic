@@ -30,17 +30,29 @@ class Player extends Phaser.Sprite {
         this.anchor.setTo(0.5);
         this._map = game.add.tilemap('level-1');
         this._combat_mode_engaged = false;
-
+        this._initAnimations();
+        this.animations.play('standing');
+        //this.animations.play('firing');
+        //this.animations.play('walking');
+        //this.animations.play('climbing');
+        this.body.setSize(28, 48, 0, 0);
     }
 
 
+    _initAnimations() {
+        this.animations.add('standing', [0, 1, 2, 3, 4], 6, true);
+        this.animations.add('firing', [5, 6, 7, 8, 9], 6, true);
+        this.animations.add('walking', [10, 11, 12, 13 ], 4, true);
+        this.animations.add('climbing', [15, 16, 17, 18, 19], 6, true);
+
+
+    }
 
     _initcursor() {
         this.cursor = this.game.add.group();
         this.cursor.enableBody = true;
         this.cursor.physicsBodyType = Phaser.Physics.ARCADE;
         this.cursor.setAll('body.collideWorldBounds', true);
-
     }
 
 
@@ -68,21 +80,41 @@ class Player extends Phaser.Sprite {
     _checkOrientation() {
         if (this.x < this.target.x) {
             this.body.velocity.x = 70;
+            this.scale.setTo(-1, 1);
+            if (this._climbing === false) {
+                this.animations.play('walking');
+            }
         }
         if (this.x > this.target.x) {
             this.body.velocity.x = -70;
+            this.scale.setTo(1, 1);
+            if (this._climbing === false) {
+                this.animations.play('walking');
+            }
         }
     }
 
- _movementReset() {
-     this.body.velocity.x = 0;
- }
-    //@override
+    _movementReset() {
+            this.body.velocity.x = 0;
+            this.animations.play('standing');
+        }
+        //@override
     update() {
-        if(this._combat_mode_engaged === true) {
+        if (this._combat_mode_engaged === true) {
 
         }
-                
+
+
+
+
+        //            if (this.body.velocity.x > 0) {
+        //                this.scale.setTo(-1, 1);
+        //        
+        //            } else {
+        //                this.scale.setTo(1, 1);
+        //  
+        //            }
+
         if (this._combat_mode_engaged === false) {
             if (this.game.input.activePointer.leftButton.isDown) {
                 this.testcoordinate = this._map.getTileWorldXY(this.game.input.activePointer.worldX, this.game.input.activePointer.worldY, 64, 64, 'CollisionLayer');
@@ -97,19 +129,28 @@ class Player extends Phaser.Sprite {
                     this.target.kill();
                     this.navigatorAlive = false;
                     this.body.velocity.x = 0;
+                    this.animations.play('standing');
                 }
             }
 
 
             if (this.body.blocked.right) {
                 this.body.velocity.y = -60;
-                this._checkOrientation();
-            }
 
-            if (this.body.blocked.left) {
+                this.animations.play('climbing');
+                this._climbing = true;
+                this._checkOrientation();
+            } else if (this.body.blocked.left) {
                 this.body.velocity.y = -60;
 
+                this.animations.play('climbing');
+                this._climbing = true;
                 this._checkOrientation();
+            } else {
+                this._climbing = false;
+                if (this.navigatorAlive) {
+                    this.animations.play('walking');
+                }
             }
         }
     }

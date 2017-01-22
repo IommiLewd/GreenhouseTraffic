@@ -20,19 +20,25 @@ class SimpleLevel extends Phaser.State {
             this.game.canvas.oncontextmenu = function (e) {
                 e.preventDefault();
             }
+              this._backgroundimg = this.add.tileSprite(-120, -120, 3200, 800, 'background');
+            
             this.stage.backgroundColor = "#4488AA";
             this._map = this.add.tilemap('level-1');
-            this._map.addTilesetImage('basicTileset', 'basicTileset');
+            //this._map.addTilesetImage('basicTileset', 'basicTileset');  /// Old Config
+            this._map.addTilesetImage('dom1', 'dom1');
             this._collision_layer = this._map.createLayer('CollisionLayer');
+            this._background_layer = this._map.createLayer('BackLayer');
             this._collision_layer.resizeWorld();
+          
         }
 
         _addPlayer(x, y) {
             this.player = new Player(this.game, 200, 200);
+            this.player.smoothed = false;
         }
         _addEnemy() {
             this.enemies = this.add.group();
-            this.enemy = new Enemy(this.game, 760, 400);
+            this.enemy = new Enemy(this.game, 760, 100);
             this.enemies.add(this.enemy);
         }
         _addUserInterface() {
@@ -58,12 +64,8 @@ class SimpleLevel extends Phaser.State {
         }
 
         _enemyPlayerCollision(enemy, player) {
-
                 this.game.time.events.add(Phaser.Timer.SECOND * 0.9, this.player._movementReset, player);
-                this.enemy._enemyDamageTaken(10);
-        
-        
-        
+                this.enemy._enemyDamageTaken(90);
         }
 
             _checkCollision() {

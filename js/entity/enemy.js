@@ -46,10 +46,6 @@ class Enemy extends Phaser.Sprite {
 
     }
 
-    _displayHealthIndicator() {
-
-    }
-
     _enemy_MovementReset() {
         if (this.body.x < this._playerPositionX) {
             this.body.velocity.x = +80;
@@ -57,7 +53,6 @@ class Enemy extends Phaser.Sprite {
             this.body.velocity.x = -80;
         }
         this.body.velocity.y = 0;
-
     }
 
 
@@ -69,10 +64,8 @@ class Enemy extends Phaser.Sprite {
           this.healthStatus.width  = this._enemyHealth / 100 * 70;
         if(this._enemyHealth < 0){ this.kill();}
         }
-        //@override
+
     update() {
-
-
         if (this._playerPositionX < this.x + 180 && this._playerPositionX > this.x - 180 && this._playerSpotted === false) {
             this._enemy_MovementReset();
             this._playerSpotted = true;

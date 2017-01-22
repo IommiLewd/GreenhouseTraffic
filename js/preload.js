@@ -3,11 +3,14 @@ class Preload extends Phaser.State {
 
         //this.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         // Images :
-        this.load.image('player', 'img/playerTemplate.png');
+       // this.load.image('player', 'img/playerTemplate.png');
+         this.load.spritesheet('player', 'img/tilesheets/PlayerCharacter.png', 48, 48, 20);
         this.load.image('pointer', 'img/pointer.png');
         this.load.image('enemy', 'img/MonsterTemplate.png');
-        this.load.image('basicTileset', 'img/basicTileset.png');
-
+       // this.load.image('basicTileset', 'img/basicTileset.png');
+        this.load.image('dom1', 'img/tilest/dom1.png');
+        //Background Image!!
+         this.load.image('background', 'img/tilest/backgroundimg.png');
 
         // Ui Items
         this.load.image('attack', 'img/UiItems/attack.png');
@@ -24,7 +27,8 @@ class Preload extends Phaser.State {
         this.load.script('enemy', 'js/entity/enemy.js');
         this.load.script('userInterface', 'js/entity/userInterface.js');
         // json files :
-        this.load.tilemap('level-1', 'json/mapOne.json', null, Phaser.Tilemap.TILED_JSON); //
+        this.load.tilemap('level-1', 'json/domMapOne.json', null, Phaser.Tilemap.TILED_JSON); //
+        //this.load.tilemap('level-1', 'json/mapOne.json', null, Phaser.Tilemap.TILED_JSON); //
     }
     create() {
         console.log("Preload.js:  Preload.create-> load_Level");
