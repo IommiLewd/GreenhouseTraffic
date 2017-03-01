@@ -7,20 +7,42 @@ class userInterface extends Phaser.Sprite {
         this._player_health = 100;
         this.actionSelected = 0;
         this._playerBlocking = false;
+        this._Gold = 50;
     }
 
     // Initialise menu items here
     _initOverlay() {
-        this.healthBarStatus = this.game.add.tileSprite(4, 4, 224, 14, 'DHPixel');
-        this.healthBarStatus.fixedToCamera = true;
-        this.healthBar = this.game.add.tileSprite(6, 6, 220, 10, 'HPixel');
+        this.healthBar = this.game.add.sprite(2, 2, 'healthBar');
         this.healthBar.fixedToCamera = true;
-        
+
+        this.energyBar = this.game.add.sprite(2, 22, 'energyBar');
+        this.energyBar.fixedToCamera = true;
+
+        this.healthBarLevel = this.game.add.tileSprite(24, 5, 218, 10, 'HPixel');
+        this.healthBarLevel.fixedToCamera = true;
+
+        this.energyBarLevel = this.game.add.tileSprite(24, 25, 218, 10, 'HPixel');
+        this.energyBarLevel.fixedToCamera = true;
+
+        this.goldCounter = this.game.add.sprite(2, 42, 'goldCounter');
+        this.goldCounter.fixedToCamera = true;
+
+        this.style = {
+            font: "12px Press Start 2P",
+            fill: "#9bb670",
+            align: "center"
+        };
+        this.goldAmount = this.game.add.text(33, 44, '14', this.style);
+        this.goldAmount.fixedToCamera = true;
+
     }
     _playerDamage(_damage) {
         this._player_health -= _damage;
-        this.healthBar.width = this._player_health / 100 * 220;
-        
+        this.healthBarLevel.width = this._player_health / 100 * 210;
+    }
+
+    _addGold(amount) {
+
     }
 
 
