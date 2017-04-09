@@ -45,9 +45,10 @@ class SimpleLevel extends Phaser.State {
         this.userInterface = new userInterface(this.game);
     }
     _addSpells() {
-            this._spells = new Spells(this.game, 0, 0, 10);
+            this._spells = new Spells(this.game, -50, -40, 10);
             console.log('spells Initialized');
-        this._spells.anchor.setTo(this.player);
+       //this._spells.anchor.setTo(this.player);
+        this.player.addChild(this._spells);
         }
         //We use this to find and create objects from the json.
         //    _findObjectsByType(targetType, tilemap, layer) {
@@ -65,10 +66,14 @@ class SimpleLevel extends Phaser.State {
         this.enemies.forEach(function (enemy, enemies, player) {
             enemy._playerPositionX = capturedPosition;
         })
+        
+        this._spells._playerPositionX = this.player.x;
+        this._spells._playerPositionY = this.player.y;
+ 
     }
 
     _enemyPlayerCollision(enemy, player) {
-        this.player._cursorReset();
+//        this.player._cursorReset();
         this.enemy._enemyDamageTaken(90);
         this.userInterface._playerDamage(20);
 
@@ -105,16 +110,16 @@ class SimpleLevel extends Phaser.State {
         this._backgroundimg.y = this.game.camera.y * 0.3;
         this._checkCollision();
         this._player_position_update();
-        //              this.physics.arcade.overlap(this.bullets, this._collision_layer, this._kill_bullet, function (bullet, _collision_layer) {
-        //                return _collision_layer.collides;
-        //            }, this);
 
-        if (this.player.x < this.enemy.x + 128 && this.player.x > this.enemy.x - 128 && this.player._combat_mode_engaged === false) {
-            //   this._initCombatMode();
+        if (this.player.x < this.enemy.x + 156 && this.player.x > this.enemy.x - 156/* && this.player._combat_mode_engaged === false*/) {
+               this.enemy._CombatEngaged();
+            this.player._combatModeEnabled();
+            this._spells._startCombatMode();
+            this.game.camera.x + 50;
 
         }
         if (this.game.input.activePointer.rightButton.isDown) {
-            this.player._fireSpell();
+            this.player._fireSpell(600);
             this._spells._fireSpell();
         }
     }

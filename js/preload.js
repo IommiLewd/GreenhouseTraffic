@@ -4,10 +4,14 @@ class Preload extends Phaser.State {
         this.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         // Images :
         this.load.spritesheet('player', 'img/tilesheets/PlayerCharacterOutline.png', 48, 48, 20);
+        this.load.spritesheet('spellIcons', 'img/UiItems/spellIcons.png', 46, 44, 20);
+        this.load.spritesheet('bulletTiles', 'img/bulletTiles.png', 26, 26, 5);
         this.load.image('pointer', 'img/pointer.png');
         this.load.image('enemy', 'img/MonsterTemplate.png');
         //this.load.image('dom1', 'img/tilest/dom1newcolor.png');
         this.load.image('dom1', 'img/tilest/dom1.png');
+        this.load.image('bullet', 'img/spellBullet.png');
+        this.load.image('verticalBullet', 'img/verticalBullet.png');
         //Background Image!!
         this.load.image('background', 'img/tilest/backgroundimg.png');
         
@@ -19,8 +23,9 @@ class Preload extends Phaser.State {
         this.load.image('energyBar', 'img/UiItems/energyBar.png');
         this.load.image('DHPixel', 'img/UiItems/darkhealthPixel.png');
         this.load.image('goldCounter', 'img/UiItems/goldCounter.Png');
+        this.load.image('SpellSlot', 'img/UiItems/SpellSlot.png');
         // js scripts :
-        this.load.script('player', 'js/entity/player.js');
+        this.load.script('player', 'js/entity/PlayerRefactored.js');
         this.load.script('simpleLevel', 'js/map/simplelevel.js');
         this.load.script('enemy', 'js/entity/enemy.js');
         this.load.script('spells', 'js/entity/spells.js');
